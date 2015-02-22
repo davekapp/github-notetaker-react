@@ -249,3 +249,36 @@ Let's first start with the Github components.
 ####Step 6: Github Components
 
 Let's work on the Left component. Remember, the Left component is what's responsible for rendering the User Profile view. 
+
+* Inside ```component/Github``` create a file called ```Left.js```. 
+* Require React, githubActions, and githubStore
+* Create a component called ```Left``` which renders an empty ```<div>```
+* export the ```Left``` component
+* Add the following properties to the initial state of your components
+ - user: which is the result of invoking the ```getUser``` method on our ```githubStore``` object.
+ - bio: which is the result of invoking the ```getBio``` method on our ```githubStore``` object.
+
+*note how we've taken the data (even the initial data) out of our component and put it into a store then we just fetch the data from the store when we need it*
+
+Whenever a transition occurs, the ```componentWillReceiveProps``` life cycle will be invoked with an object being the route parameters. This allows us to change our data whenever a transition (going from one user to the different user) occurres. 
+
+* Inside the ```componentWillReceiveProps``` lifecycle method, have the method take in an ```obj``` parameter, and invoke the ```changeUser``` method on ```githubActions``` passing it ```obj.username``` and invoke the ```getUserBio``` method on ```githubActions``` passing it ```obj.username``` as well. *So what we've done here is everytime a new username is entered, we'll kick off these two actions, which will update the user and the users bio in our store*.
+
+Remember in our Store when we created the ```addChangeListener``` method? The purpose of that was so when we emitted our change event, we could invoke a method in our view that would update the state with the data that is in the store. Let's create that view method now.
+
+* Add an ```_onChange``` method to your ```Left``` component which uses ```setState``` to reset the user and bio properties with whatever is in the Github Store (using ```getUser``` and ```getBio```).
+
+Now in our componentDidMount we need to add invoke ```addChangeListener``` on the Store and pass it our ```_onChange``` method as well as a few other things.
+
+* When the ```Left``` component mounts do the following
+  - Invoke the ```changeUser``` method on the ```githubActions``` object passing it ```this.props.username``` as its only argument.
+  - Invoke the ```getUserBio``` method on the ```githubActions``` object passing it ```this.props.username``` as its only argument.
+  - Invoke the ```addChangeListener``` method on the ```githubStore``` object passing it ```this._onChange``` as its only argument.
+
+Now, the last thing we need to do before we render is to remove the change listener when the component unmounts.
+
+* When the ```Left``` component unmounts, invoke the ```removeChangeListener``` on the ```githubStore``` object passing it ```this._onChange``` as its only argument.
+
+
+
+
