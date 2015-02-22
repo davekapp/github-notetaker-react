@@ -25,7 +25,6 @@ var Middle = React.createClass({
   },
   render: function(){
     var repos = this.state.repos.map(function(repo, index){
-      debugger;
       return (
         <li className="list-group-item" key={index}>
           {repo.html_url && <p><h4><a href={repo.html_url}>{repo.name}</a></h4></p>}

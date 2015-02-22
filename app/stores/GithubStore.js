@@ -8,7 +8,7 @@ var CHANGE_EVENT = 'change';
 var _state = {
   user: '',
   bio: undefined,
-  repos: undefined,
+  repos: undefined
 };
 
 var newUser = function(username){
