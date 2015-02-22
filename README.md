@@ -304,3 +304,35 @@ The last thing we need to do is render our bio template. The tricky part about t
 ```
 
 ####Step 7: Github Components (Middle)
+
+In your ```components/Github``` folder create a file called ```Middle.js```. This Middle component will be responsible for getting and rendering the list of users Repos. It's going to follow a very similar pattern as the Left component so directions will be more vague. 
+
+* Require React, githubActions, and githubStore.
+* Create a component called Middle with an empty ```<div>``` in its render method
+* Set the initial state to ```repos``` whose value is the repos from the githubStore
+* When the github username changes (componentWillReceiveProps) invoke ```getUserRepos``` on ```githubActions``` passing it the new username.
+* Create a _onChange method which will update the ```repos``` state with the data that's in the store.
+* When the component mounts, pass ```getUserRepos``` on ```githubActions``` the username prop and then add the ```_onChange``` event listener to the store.
+* Inside of render map over all the items in ```this.state.map``` creating ```<li>``` elements for each item.
+
+Here's my render implementation.
+```javascript
+render: function(){
+  var repos = this.state.repos.map(function(repo, index){
+    return (
+      <li className="list-group-item" key={index}>
+        {repo.html_url && <p><h4><a href={repo.html_url}>{repo.name}</a></h4></p>}
+        {repo.description && <p> {repo.description} </p>}
+      </li>
+    )
+  });
+  return (
+    <div>
+      <h3> User Repos </h3>
+      <ul className="list-group">
+        {repos}
+      </ul>
+    </div>
+  )
+}
+```
