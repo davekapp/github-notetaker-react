@@ -18,7 +18,7 @@ Final Project Component Visualization:
 
 For reference the final folder structure will look something like this.
 
-![File structure](http://s18.postimg.org/z8okmz1tl/Screen_Shot_2015_02_21_at_7_13_35_PM.png)
+![File structure](http://s24.postimg.org/3nta2ae6d/file_structure.png)
 
 ####Step 1.5: Github API
 
@@ -224,3 +224,26 @@ changeUser: function(username){
 
 Now that our Stores and Actions are finished, we know quite a bit about our application and the rest should be a breeze. All we need to do now is build out our components and then set up routing. 
 
+####Step 5: Component Overview
+
+Before we jump into creating our components, let's take an overview of each component we'll build.
+
+ - Main (Finished) - This component is what has our <RouteHandler /> as well as our Menu
+ - Home (Finished) - This component is rendered on the '/' path. 
+ - SearchGithub (Finished) - The component responsible for getting a username and transitioning to the profile view with that username. 
+ - Profile (Finished but Commented Out) - A component which is essentially the bootstrapped wrapper for our components on the profile page. *Once we build out the other components, we'll uncomment the code in this component*.
+
+Github Components
+  - Left - The component which renders the left bio panel on the profiles page.
+  - Middle - The component which renders the middle repos panel on the profiles page.
+
+Notes Components
+ - AddNote - Manages the input box and action creator for creating a new note
+ - NotesList - Creats an unordered list of all of the users notes.
+ - Notes - The component which manages the notes state as well as renders the AddNote and NotesList components
+ 
+As you can see, a lot of the components are already built for you. You'll just need to build the Github components and the Notes components. 
+
+Let's first start with the Github components.
+
+####Step 6: Github Components
