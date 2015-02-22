@@ -18,7 +18,7 @@ Final Project Component Visualization:
 
 For reference the final folder structure will look something like this.
 
-![File structure](http://s24.postimg.org/3nta2ae6d/file_structure.png)
+![File structure](http://s11.postimg.org/sdttt61w3/filestructure.png)
 
 ####Step 1.5: Github API
 
