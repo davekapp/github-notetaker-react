@@ -181,4 +181,44 @@ getUserBio: function(username){
   }
 ```
 
-Now build out the ```getUserRepos``` and the ```changeUser``` methods. *hint: Both of these methods take in a ```username``` parameter. 
+Now build out the ```getUserRepos``` and the ```changeUser``` methods. *hint: Both of these methods take in a ```username``` parameter. ```getUserRepos``` will call the ```getRepos``` method on ```githubUtils``` and then dispatch the ```GITHUB_USER_REPOS``` event passing along ```response.data``` as the data. The ```changeUser``` method will just dispatch the ```GITHUB_CHANGE_USER``` constant passing along ```username``` as the data.
+
+* Last step as always is export the ```githubActions``` object you just made. 
+
+####Step 4: NoteActions
+
+The next Actions file we need to create is for our NoteActions.
+
+* Inside the ```actions``` folder create a file called ```noteActions.js```.
+* In this file require AppDispatcher, AppConstants, and firebaseUtils.
+* Create an object called ```noteActions``` which has a ```addNote``` method which takes in a ```noteObj``` parameter and a ```changeUser``` method which takes in a ```username``` parameter. 
+
+```addNote``` will do two things. 1) Dispatch an ```ADD_NOTE``` event and 2) add a note to firebase.
+
+* Inside of the ```addNote``` method, invoke the ```handleAction``` method on ```AppDispatcher``` passing it an object with a ```actionType``` property whose value is ```AppConstants.ADD_NOTES``` and a ```data``` property whose value is ```noteObj.note```. 
+* That's not all for the ```addNote``` method. After you invoke ```handleAction``` then also invoke the ```addNote``` method on the ```firebaseUtils``` object passing it ```noteObj```. 
+
+Now let's build out the ```changeUser``` method.
+
+What ```changeUser``` is going to do is it's going to set use some firebase magic to get all the data in a certain firebase location, and when that data is ready (or whenever that data has changed), it's going to dispatch an action including in the payload the user as well as the new data. 
+
+Because this method is a little "firebase-y", here's what the code should look like.
+
+```javascript
+changeUser: function(username){
+  firebaseUtils.homeInstance().child(username).on('value', function(snapshot){
+    AppDispatcher.handleAction({
+      actionType: AppConstants.CHANGE_USER,
+      data: {
+        user: username,
+        notes: firebaseUtils.toArray(snapshot.val())
+      }
+    });
+  });
+}
+```
+
+* Last step as always, export the ```noteActions``` object.
+
+Now that our Stores and Actions are finished, we know quite a bit about our application and the rest should be a breeze. All we need to do now is build out our components and then set up routing. 
+
