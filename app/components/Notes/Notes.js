@@ -1,24 +1,24 @@
 var React = require('react');
-var NotesStore = require('../../stores/NotesStore');
+var notesStore = require('../../stores/notesStore');
 var AddNote = require('./AddNote');
 var NotesList = require('./NotesList');
-var NoteActions = require('../../actions/NoteActions');
+var noteActions = require('../../actions/noteActions');
 
 var Notes = React.createClass({
   getInitialState: function(){
     return {
-      notes: NotesStore.getState().notes
+      notes: notesStore.getState().notes
     };
   },
   componentWillReceiveProps: function(obj){
-    NoteActions.changeUser(obj.username);
+    noteActions.changeUser(obj.username);
   },
   componentDidMount: function(){
-    NoteActions.changeUser(this.props.username);
-    NotesStore.addChangeListener(this._onChange);
+    noteActions.changeUser(this.props.username);
+    notesStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function(){
-    NotesStore.removeChangeListener(this._onChange);
+    notesStore.removeChangeListener(this._onChange);
   },
   render: function(){
     return (
@@ -31,7 +31,7 @@ var Notes = React.createClass({
   },
   _onChange: function(){
     this.setState({
-      notes: NotesStore.getState().notes
+      notes: notesStore.getState().notes
     })
   }
 });

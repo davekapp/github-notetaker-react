@@ -1,6 +1,6 @@
 var React = require('react');
-var noteActions = require('../../actions/NoteActions');
-var notesStore = require('../../stores/NotesStore');
+var noteActions = require('../../actions/noteActions');
+var notesStore = require('../../stores/notesStore');
 
 var AddNote = React.createClass({
   handleSubmit: function(){

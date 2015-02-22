@@ -1,5 +1,5 @@
 var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
+var appConstants = require('../constants/appConstants');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
 
@@ -21,7 +21,7 @@ var changeUser = function(newUserObj){
   };
 };
 
-var NotesStore = objectAssign({}, EventEmitter.prototype, {
+var notesStore = objectAssign({}, EventEmitter.prototype, {
   getState: function(){
     return _state;
   },
@@ -39,13 +39,13 @@ var NotesStore = objectAssign({}, EventEmitter.prototype, {
 AppDispatcher.register(function(payload){
   var action = payload.action;
   switch(action.actionType){
-    case AppConstants.ADD_NOTE :
+    case appConstants.ADD_NOTE :
       addNote(action.data);
-      NotesStore.emit(CHANGE_EVENT);
+      notesStore.emit(CHANGE_EVENT);
       break;
-    case AppConstants.CHANGE_USER :
+    case appConstants.CHANGE_USER :
       changeUser(action.data);
-      NotesStore.emit(CHANGE_EVENT);
+      notesStore.emit(CHANGE_EVENT);
       break;
     default:
       return true
@@ -53,4 +53,4 @@ AppDispatcher.register(function(payload){
   return true;
 });
 
-module.exports = NotesStore;
+module.exports = notesStore;

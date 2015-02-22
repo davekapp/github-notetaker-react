@@ -1,6 +1,6 @@
 var React = require('react');
-var GithubActions = require('../../actions/GithubActions');
-var GithubStore = require('../../stores/GithubStore');
+var githubActions = require('../../actions/githubActions');
+var githubStore = require('../../stores/githubStore');
 
 var Left = React.createClass({
   getInitialState: function(){
@@ -10,21 +10,21 @@ var Left = React.createClass({
     }
   },
   componentWillReceiveProps: function(obj){
-    GithubActions.changeUser(obj.username);
-    GithubActions.getUserBio(obj.username);
+    githubActions.changeUser(obj.username);
+    githubActions.getUserBio(obj.username);
   },
   componentDidMount: function(){
-    GithubActions.changeUser(this.props.username);
-    GithubActions.getUserBio(this.props.username);
-    GithubStore.addChangeListener(this._onChange);
+    githubActions.changeUser(this.props.username);
+    githubActions.getUserBio(this.props.username);
+    githubStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function(){
-    GithubStore.removeChangeListener(this._onChange);
+    githubStore.removeChangeListener(this._onChange);
   },
   _onChange: function(){
     this.setState({
-      user: GithubStore.getUser(),
-      bio: GithubStore.getBio()
+      user: githubStore.getUser(),
+      bio: githubStore.getBio()
     });
   },
   render: function(){

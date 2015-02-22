@@ -1,4 +1,4 @@
-var AppConstants = {
+var appConstants = {
   ADD_NOTE: 'ADD_NOTE',
   CHANGE_USER: 'CHANGE_USER',
   GITHUB_USER_BIO: 'GITHUB_USER_BIO',
@@ -7,4 +7,4 @@ var AppConstants = {
   FIREBASE_HOST: 'https://github-note-taker.firebaseio.com/notes'
 };
 
-module.exports = AppConstants;
+module.exports = appConstants;

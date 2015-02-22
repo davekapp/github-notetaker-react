@@ -1,6 +1,6 @@
 var React = require('react');
-var GithubActions = require('../../actions/GithubActions');
-var GithubStore = require('../../stores/GithubStore');
+var githubActions = require('../../actions/githubActions');
+var githubStore = require('../../stores/githubStore');
 
 var Middle = React.createClass({
   getInitialState: function(){
@@ -9,18 +9,18 @@ var Middle = React.createClass({
     }
   },
   componentWillReceiveProps: function(obj){
-    GithubActions.getUserRepos(obj.username);
+    githubActions.getUserRepos(obj.username);
   },
   componentDidMount: function(){
-    GithubActions.getUserRepos(this.props.username);
-    GithubStore.addChangeListener(this._onChange);
+    githubActions.getUserRepos(this.props.username);
+    githubStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function(){
-    GithubStore.removeChangeListener(this._onChange);
+    githubStore.removeChangeListener(this._onChange);
   },
   _onChange: function(){
     this.setState({
-      repos: GithubStore.getRepos()
+      repos: githubStore.getRepos()
     });
   },
   render: function(){
