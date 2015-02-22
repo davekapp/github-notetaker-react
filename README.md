@@ -68,10 +68,10 @@ the target is going to be an empty object, the source is going to be the ```Even
 * Use objectAssign to create a new object called githubStore which extends EventEmitter and has the following properties.
   - An ```emitChange``` method which uses the ```emit``` method which was originally on the EventEmitter.prototype to emit our change event (CHANGE_EVENT). *hint: use ```this.emit()```
   - An ```addChangeListener``` method which takes in a callback function as its only parameter and then invokes the ```on``` method which was originally on EventEmitter.prototype passing it the change event variable we defined earlier as well as the callback which was passed in.
-  - A ```removeChangeListener``` method which takes in a callback function as its only parameter and then invokes the ```removeListener``` method which was originally on EventEmitter.prototype passing it the change event variable we defiend earlier as well as the callback which was passed in.
+  - A ```removeChangeListener``` method which takes in a callback function as its only parameter and then invokes the ```removeListener``` method which was originally on EventEmitter.prototype passing it the change event variable we defined earlier as well as the callback which was passed in.
   - A ```getUser``` method which returns the ```user``` property on our ```_state``` object.
   - A ```getBio``` method which returns the ```bio``` property on our ```_state``` object
-  - A ```getRepos``` method which returns the ```repos``` propetty on our ```_state``` object.
+  - A ```getRepos``` method which returns the ```repos``` property on our ```_state``` object.
 
 *If you're stuck with the code above, when I say "which was originally on the EventEmitter.prototype" what I'm meaning is that when we used objectAssign, those EventEmitter.prototype properties were copied over to our githubStore object. Now, to reference those methods in this case you can use the keyword ```this```. So for example, above our addChangeListener method should look like this.
 ```javascript
@@ -82,7 +82,7 @@ addChangeListener: function(cb){
 
 Now the last thing we need to do is register actions with our Store so our Store will be able to listen for certain signals dispatched by the dispatcher. Remember the process for Flux goes like this, **(1) A user initiates some event, (2) that event invokes an action (3) which then triggers the dispatcher. The dispatcher then (4) dispatches an event which (5) is then caught by the Stores who subscribe to those events. The Store then (6) calls some internal setter method which alters its internal state, then the Store (7) emits a change event which brings us full circle back to the (8) view which updates its own internal state.**.
 
-So our Store is repsponsible for numbers 5 - 7. We've created the ability to do number 6 and 7, but we still haven't had our Store subscribe to any events (5). Let's do that right now.
+So our Store is responsible for numbers 5 - 7. We've created the ability to do number 6 and 7, but we still haven't had our Store subscribe to any events (5). Let's do that right now.
 
 What you might have the thought of doing initially is to register the Dispatcher actions on the actual Store itself. In our example above, something like this ```githubStore.register(function...)```, however, that's not how it works. You register your actions listeners on the Dispatcher itself. This makes sense if you think of it as the Dispatcher is the one dispatching the event, so it could also be the one who registers what functionality will be invoked when those dispatches are received.
 
@@ -107,7 +107,7 @@ Head back over to the ```githubStore.js``` file and inside the switch statement 
  - ```appConstants.GITHUB_CHANGE_USER``` which will call the ```newUser``` setter function and pass it ```action.data``` then emit that a change occurred.
  - Have the default case just return true
 
-*One thing to note is that when a change occurred, we're not emitting what that change was, we're only emitting that a change occurred. Our view doesn't care about what changed, it just cares that something did change. With the ~~power of the virtual DOM~~ we can just tell our view to rerender everytime there is a change without performance worries.*
+*One thing to note is that when a change occurred, we're not emitting what that change was, we're only emitting that a change occurred. Our view doesn't care about what changed, it just cares that something did change. With the ~~power of the virtual DOM~~ we can just tell our view to rerender every time there is a change without performance worries.*
 
 * Use module.exports to export the githubStore.
 
@@ -115,7 +115,7 @@ Our githubStore is now complete. It has and can manage its own state as well as 
 
 ####Step 3: Notes Store
 
-The NotesStore is going to look very similar to the GithubStore we just created except it will obviously be related to the notes about the user and not their github information. Because of the similarity, this section will be purposelly vague. If you get stuck on the implementation detail, check out the githubStore.js file for help.
+The NotesStore is going to look very similar to the GithubStore we just created except it will obviously be related to the notes about the user and not their github information. Because of the similarity, this section will be purposely vague. If you get stuck on the implementation detail, check out the githubStore.js file for help.
 
 * Before we actually begin building the notesStore, you'll need to go to your firebase account and create a new project, once you do that, head over to your ```appConstants.js``` file and on the ```appConstants``` object add a property of ```FIREBASE_HOST``` whose value is your firebase URL endpoint
 
@@ -126,9 +126,9 @@ The NotesStore is going to look very similar to the GithubStore we just created 
  - objectAssign
  - EventEmitter
 * Create a change event constant
-* Createa a state which has a ```notes``` whose value is set to an empty array and a ```user``` property whose value is an empty string.
+* Create a state which has a ```notes``` whose value is set to an empty array and a ```user``` property whose value is an empty string.
 * Create an addNote setter function which takes in a note parameter and adds that note to the state's note property
-* creata a changeUser function which takes in a new user object as its parameter and then resets the state with the user property being the ```user``` property on the object which was passed in and the ```notes``` property being set to the ```notes``` property on the obejct which was passed in.
+* creata a changeUser function which takes in a new user object as its parameter and then resets the state with the user property being the ```user``` property on the object which was passed in and the ```notes``` property being set to the ```notes``` property on the object which was passed in.
 * Create your notesStore object with the following methods (which are self explanatory and similar to what we did in githubStore.js)
   - getState
   - emitChange
@@ -146,7 +146,7 @@ Let's now consider the actions the user should be able to make in regards to the
 
 Now that are stores are all set up, the next step is setting up our actions which will be dispatching our payloads.
 
-Let's start off by creating a ```githubActions.js``` file in the ```actions``` folter.
+Let's start off by creating a ```githubActions.js``` file in the ```actions``` folder.
 
 This file needs to require three things. AppDispatcher, appConstants, and githubUtils
 
@@ -169,7 +169,7 @@ Now let's build out these methods.
   - actionType: appConstants.GITHUB_USER_BIO
   - data: response.data
 
-Because some of you might be unfamilar with promises and .then, here's what that code should look like.
+Because some of you might be unfamiliar with promises and .then, here's what that code should look like.
 
 ```javascript
 getUserBio: function(username){
@@ -239,7 +239,7 @@ Github Components
 
 Notes Components
  - AddNote - Manages the input box and action creator for creating a new note
- - NotesList - Creats an unordered list of all of the users notes.
+ - NotesList - Create an unordered list of all of the users notes.
  - Notes - The component which manages the notes state as well as renders the AddNote and NotesList components
 
 As you can see, a lot of the components are already built for you. You'll just need to build the Github components and the Notes components.
@@ -260,9 +260,9 @@ Let's work on the Left component. Remember, the Left component is what's respons
 
 *note how we've taken the data (even the initial data) out of our component and put it into a store then we just fetch the data from the store when we need it*
 
-Whenever a transition occurs, the ```componentWillReceiveProps``` life cycle will be invoked with an object being the route parameters. This allows us to change our data whenever a transition (going from one user to the different user) occurres.
+Whenever a transition occurs, the ```componentWillReceiveProps``` life cycle will be invoked with an object being the route parameters. This allows us to change our data whenever a transition (going from one user to the different user) occurs.
 
-* Inside the ```componentWillReceiveProps``` lifecycle method, have the method take in an ```obj``` parameter, and invoke the ```changeUser``` method on ```githubActions``` passing it ```obj.username``` and invoke the ```getUserBio``` method on ```githubActions``` passing it ```obj.username``` as well. *So what we've done here is everytime a new username is entered, we'll kick off these two actions, which will update the user and the users bio in our store*.
+* Inside the ```componentWillReceiveProps``` lifecycle method, have the method take in an ```obj``` parameter, and invoke the ```changeUser``` method on ```githubActions``` passing it ```obj.username``` and invoke the ```getUserBio``` method on ```githubActions``` passing it ```obj.username``` as well. *So what we've done here is every time a new username is entered, we'll kick off these two actions, which will update the user and the users bio in our store*.
 
 Remember in our Store when we created the ```addChangeListener``` method? The purpose of that was so when we emitted our change event, we could invoke a method in our view that would update the state with the data that is in the store. Let's create that view method now.
 
@@ -339,7 +339,7 @@ render: function(){
 
 ####Step 9: Notes Components
 
-Like we've done before, this last step is going to be farily vague as a way for you to get used to building used to Flux type components without relying too much on the instructions. To accomplish this, I'll give you the render method of each component but you'll have to tie the pieces together with Flux.
+Like we've done before, this last step is going to be fairly vague as a way for you to get used to building used to Flux type components without relying too much on the instructions. To accomplish this, I'll give you the render method of each component but you'll have to tie the pieces together with Flux.
 
 * In your ```components/Notes``` folder you should have a ```NotesList.js``` file already. Create two more files. One called ```AddNote.js``` and another called ```Notes.js```.
 
