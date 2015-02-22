@@ -5,7 +5,7 @@ var githubStore = require('../../stores/githubStore');
 var Middle = React.createClass({
   getInitialState: function(){
     return {
-      repos: []
+      repos: githubStore.getRepos()
     }
   },
   componentWillReceiveProps: function(obj){

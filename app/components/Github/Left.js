@@ -5,8 +5,8 @@ var githubStore = require('../../stores/githubStore');
 var Left = React.createClass({
   getInitialState: function(){
     return {
-      user: '',
-      bio: {}
+      user: githubStore.getUser(),
+      bio: githubStore.getBio()
     }
   },
   componentWillReceiveProps: function(obj){
