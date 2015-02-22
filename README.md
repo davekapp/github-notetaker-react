@@ -42,8 +42,8 @@ One of the main reasons for a Store in Flux is to keep track of some state.
 
 Make a variable called ```_state``` and set it equal to an object with the following properties/values.
  - user: ''
- - bio: undefined
- - repos: undefined
+ - bio: {}
+ - repos: []
 
 Those three properties are going to be what our Github Store will be responsible for keeping track of. Everything we build in our Github Store from here out will all be in relationship to those three values. This makes it easy to reason about our code because if something happened with one of those three values, the perpetrator will be refined to a small location.
 
@@ -247,3 +247,5 @@ As you can see, a lot of the components are already built for you. You'll just n
 Let's first start with the Github components.
 
 ####Step 6: Github Components
+
+Let's work on the Left component. Remember, the Left component is what's responsible for rendering the User Profile view. 
