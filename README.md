@@ -117,6 +117,8 @@ Our githubStore is now complete. It has and can manage its own state as well as 
 
 The NotesStore is going to look very similar to the GithubStore we just created except it will obviously be related to the notes about the user and not their github information. Because of the similarity, this section will be purposelly vague. If you get stuck on the implementation detail, check out the githubStore.js file for help.
 
+* Before we actually begin building the notesStore, you'll need to go to your firebase account and create a new project, once you do that, head over to your ```appConstants.js``` file and on the ```appConstants``` object add a property of ```FIREBASE_HOST``` whose value is your firebase URL endpoint 
+
 * In your ```stores``` folder create a file called ```notesStore.js```.
 * Require
  - AppDispatcher
