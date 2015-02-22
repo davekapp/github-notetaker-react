@@ -1,11 +1,11 @@
-var AppConstants = require('../constants/AppConstants');
+var appConstants = require('../constants/appConstants');
 var axios = require('axios');
 
-var id = "8aac9fc174be2e332995";
-var sec = "a483f37eb84479a1c8ccd3d25c08869e80709c96";
+var id = "YOUR_CLIENT_ID_HERE";
+var sec = "YOUR_SECRET_ID_HERE";
 var param = "?client_id=" + id + "&client_secret=" + sec;
 
-var GithubUtils = {
+var githubUtils = {
   getBio: function(username){
     var url = "https://api.github.com/users/" + username + param;
     return axios.get(url);
@@ -16,4 +16,4 @@ var GithubUtils = {
   }
 };
 
-module.exports = GithubUtils;
+module.exports = githubUtils;

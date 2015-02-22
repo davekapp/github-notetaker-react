@@ -1,13 +1,16 @@
 var React = require('react');
 var Router = require('react-router');
-var NotesStore = require('../stores/NotesStore');
+var notesStore = require('../stores/notesStore');
+
+/*
 var Left = require('../components/Github/Left');
 var Middle = require('../components/Github/Middle');
 var Notes = require('../components/Notes/Notes');
-
+*/
 var Profile = React.createClass({
   mixins: [ Router.State ],
   render: function(){
+    /*
     var username = this.getParams().username;
     return (
       <div className="row">
@@ -22,6 +25,7 @@ var Profile = React.createClass({
         </div>
       </div>
     )
+    */
   }
 });
 
