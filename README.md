@@ -17,6 +17,7 @@ Final Project Component Visualization:
   * Familiarize yourself with the given code and file structure
 
 For reference the final folder structure will look something like this.
+
 ![File structure](http://s18.postimg.org/z8okmz1tl/Screen_Shot_2015_02_21_at_7_13_35_PM.png)
 
 ####Step 2: Stores
