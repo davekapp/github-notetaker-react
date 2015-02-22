@@ -134,7 +134,4 @@ Let's now consider the actions the user should be able to make in regards to the
 * Head over to AppConstants.js and add the following constants into the object that's being exported.
 * Now back in NotesStore.js, register both of those actions (ADD_NOTE and CHANGE_USER) and add the proper functionality when the AppDispatcher dispatches either of those events.
 
-*Note that although that the implementation for Notes is needing to make an external request to fetch/set the data, we're not doing that in the NotesStore but we'll do it in our Actions file. This keeps the traditional data flow Flux pattern of VIEWS -> DISPATCHER -> STORES constant. 
-
-
-*Talk about data being fetched in action then passed to store.
+*Note that although that the implementation for Notes is needing to make an external request to fetch/set the data, we're not doing that in the NotesStore but we'll do it in our Actions file. This keeps the traditional data flow Flux pattern of VIEWS -> DISPATCHER -> STORES constant.*
