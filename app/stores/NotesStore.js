@@ -2,7 +2,6 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var objectAssign = require('react/lib/Object.assign');
 var EventEmitter = require('events').EventEmitter;
-var fbRef = require('../utils/FirebaseUtils.js').homeInstance();
 
 var CHANGE_EVENT = 'change';
 
