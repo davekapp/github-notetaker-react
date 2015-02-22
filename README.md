@@ -33,7 +33,7 @@ This app is going to have two Stores. A Github Store and a Notes Store. The Gith
 Let's start out by building our Github Store. 
   - Head over to your "stores" folder and create a new file called ```githubStore.js```.
 * Require your AppDispatcher in the ```dispatcher/AppDispatcher``` folder
-* Require your AppContants in the ```constants/AppConstants``` folder
+* Require your appConstants in the ```constants/appConstants``` folder
 * Require EventEmitter using ```require('events').EventEmitter```. *EventEmitter will allow us to emit changes from our Store and listen for those changes in our Components*
 * Require objectAssign which can be found at ```react/lib/Object.assign```. *objectAssign allows us to extend an object with another object. We'll use it to give our githubStore object the ability to emit events by extending it (or copying properties) with the EventEmitter*
 * Create a variable called ```CHANGE_EVENT``` and set it equal to the string "change".
@@ -92,8 +92,8 @@ What you might have the thought of doing initially is to register the Dispatcher
 
 Earlier I mentioned how in order to build out your stores, you'll need to know the action types that your app is going to use. In the case of our GithubStore, let's brainstorm some actions which will be happening. The user needs the ability to get the users github bio, get the users repos, and change the user. Let's now create three constants which will represent those three actions. 
 
-* Head over to your constants folder and create a new file called ```AppConstants.js```.
-* In that file create an object called ```AppConstants``` and then export that object.
+* Head over to your constants folder and create a new file called ```appConstants.js```.
+* In that file create an object called ```appConstants``` and then export that object.
 * In that object, create the following keys value pairs
   - GITHUB_USER_BIO: "GITHUB_USER_BIO"
   - GITHUB_USER_REPOS: "GITHUB_USER_REPOS"
@@ -102,9 +102,9 @@ Earlier I mentioned how in order to build out your stores, you'll need to know t
 Now anytime we want to represent any of the Github actions we mentioned above, we can use these constants to be consistent throughout our application. 
 
 Head back over to the ```githubStore.js``` file and inside the switch statement create the following cases.
- - ```AppConstants.GITHUB_USER_BIO``` which will call the ```setBio``` setter function and pass it ```action.data``` then invoke ```githubStore.emit``` and pass it the change event variable we created at the top of the file.
- - ```AppConstants.GITHUB_USER_REPOS``` which will call the ```setRepos``` setter function and pass it ```action.data``` then emit that a change occurred.
- - ```AppConstants.GITHUB_CHANGE_USER``` which will call the ```newUser``` setter function and pass it ```action.data``` then emit that a change occurred.
+ - ```appConstants.GITHUB_USER_BIO``` which will call the ```setBio``` setter function and pass it ```action.data``` then invoke ```githubStore.emit``` and pass it the change event variable we created at the top of the file.
+ - ```appConstants.GITHUB_USER_REPOS``` which will call the ```setRepos``` setter function and pass it ```action.data``` then emit that a change occurred.
+ - ```appConstants.GITHUB_CHANGE_USER``` which will call the ```newUser``` setter function and pass it ```action.data``` then emit that a change occurred.
  - Have the default case just return true
 
 *One thing to note is that when a change occurred, we're not emitting what that change was, we're only emitting that a change occurred. Our view doesn't care about what changed, it just cares that something did change. With the ~~power of the virtual DOM~~ we can just tell our view to rerender everytime there is a change without performance worries.* 
@@ -120,7 +120,7 @@ The NotesStore is going to look very similar to the GithubStore we just created 
 * In your ```stores``` folder create a file called ```notesStore.js```.
 * Require
  - AppDispatcher
- - AppConstants
+ - appConstants
  - objectAssign
  - EventEmitter
 * Create a change event constant
@@ -135,7 +135,7 @@ The NotesStore is going to look very similar to the GithubStore we just created 
 
 Let's now consider the actions the user should be able to make in regards to the Notes functionality. The user should be able to 1) Add a new note (ADD_NOTE) and 2) change the user (CHANGE_USER).
 
-* Head over to AppConstants.js and add the following constants into the object that's being exported.
+* Head over to appConstants.js and add the following constants into the object that's being exported.
 * Now back in notesStore.js, register both of those actions (ADD_NOTE and CHANGE_USER) and add the proper functionality when the AppDispatcher dispatches either of those events.
 
 *Note that although that the implementation for Notes is needing to make an external request to fetch/set the data, we're not doing that in the NotesStore but we'll do it in our Actions file. This keeps the traditional data flow Flux pattern of VIEWS -> DISPATCHER -> STORES constant.*
@@ -146,13 +146,13 @@ Now that are stores are all set up, the next step is setting up our actions whic
 
 Let's start off by creating a ```githubActions.js``` file in the ```actions``` folter. 
 
-This file needs to require three things. AppDispatcher, AppConstants, and githubUtils
+This file needs to require three things. AppDispatcher, appConstants, and githubUtils
 
 You might have noticed from step 1, but our githubUtils file is just returning us an object with a few helper methods for communicating with the Github API. One library we're using that we haven't talked about is [Axios](https://github.com/mzabriskie/axios). If you're coming from an Angular background Axios is very similar to $http. Axios is a "promise based http client for the browser and node". I'm a huge fan of it because it allows us to make promise based http requests without the need of something like jQuery. *If you've never used promises before, check out [this quick article](http://andyshora.com/promises-angularjs-explained-as-cartoon.html) explaining their purpose and how they work.*
 
 Head back to your githubActions.js file.
 
-* require AppDispatcher, AppConstants, and githubUtils.
+* require AppDispatcher, appConstants, and githubUtils.
 * Creata a githubActions object which has the following methods
   - getUserBio
   - getUserRepos
@@ -164,7 +164,7 @@ Now let's build out these methods.
 *For those unfamiliar with promises, Axios returns us a promise and what the ```.then``` does is it says, "when we get the data back from github, we'll invoke the function that you passed into ```.then``` passing it the github data as the first argument. This is useful because once we get the data from iTunes, we want to use AppDispatcher to dispatch our payload.*
 
 * In the function being passed to ```.then```, invoke the ```handleAction``` property on the AppDispatcher and pass it an object with the following properties/values
-  - actionType: AppConstants.GITHUB_USER_BIO
+  - actionType: appConstants.GITHUB_USER_BIO
   - data: response.data
  
 Because some of you might be unfamilar with promises and .then, here's what that code should look like.
@@ -174,7 +174,7 @@ getUserBio: function(username){
     githubUtils.getBio(username)
       .then(function(response){
         AppDispatcher.handleAction({ In
-            actionType: AppConstants.GITHUB_USER_BIO,
+            actionType: appConstants.GITHUB_USER_BIO,
             data: response.data
         });
       });
@@ -190,12 +190,12 @@ Now build out the ```getUserRepos``` and the ```changeUser``` methods. *hint: Bo
 The next Actions file we need to create is for our NoteActions.
 
 * Inside the ```actions``` folder create a file called ```noteActions.js```.
-* In this file require AppDispatcher, AppConstants, and firebaseUtils.
+* In this file require AppDispatcher, appConstants, and firebaseUtils.
 * Create an object called ```noteActions``` which has a ```addNote``` method which takes in a ```noteObj``` parameter and a ```changeUser``` method which takes in a ```username``` parameter. 
 
 ```addNote``` will do two things. 1) Dispatch an ```ADD_NOTE``` event and 2) add a note to firebase.
 
-* Inside of the ```addNote``` method, invoke the ```handleAction``` method on ```AppDispatcher``` passing it an object with a ```actionType``` property whose value is ```AppConstants.ADD_NOTES``` and a ```data``` property whose value is ```noteObj.note```. 
+* Inside of the ```addNote``` method, invoke the ```handleAction``` method on ```AppDispatcher``` passing it an object with a ```actionType``` property whose value is ```appConstants.ADD_NOTES``` and a ```data``` property whose value is ```noteObj.note```. 
 * That's not all for the ```addNote``` method. After you invoke ```handleAction``` then also invoke the ```addNote``` method on the ```firebaseUtils``` object passing it ```noteObj```. 
 
 Now let's build out the ```changeUser``` method.
@@ -208,7 +208,7 @@ Because this method is a little "firebase-y", here's what the code should look l
 changeUser: function(username){
   firebaseUtils.homeInstance().child(username).on('value', function(snapshot){
     AppDispatcher.handleAction({
-      actionType: AppConstants.CHANGE_USER,
+      actionType: appConstants.CHANGE_USER,
       data: {
         user: username,
         notes: firebaseUtils.toArray(snapshot.val())
