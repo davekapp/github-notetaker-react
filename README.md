@@ -187,7 +187,7 @@ Now build out the ```getUserRepos``` and the ```changeUser``` methods. *hint: Bo
 
 * Last step as always is export the ```githubActions``` object you just made. 
 
-####Step 4: NoteActions
+####Step 5: NoteActions
 
 The next Actions file we need to create is for our NoteActions.
 
@@ -224,7 +224,7 @@ changeUser: function(username){
 
 Now that our Stores and Actions are finished, we know quite a bit about our application and the rest should be a breeze. All we need to do now is build out our components and then set up routing. 
 
-####Step 5: Component Overview
+####Step 6: Component Overview
 
 Before we jump into creating our components, let's take an overview of each component we'll build.
 
@@ -246,7 +246,7 @@ As you can see, a lot of the components are already built for you. You'll just n
 
 Let's first start with the Github components.
 
-####Step 6: Github Components (Left)
+####Step 7: Github Components (Left)
 
 Let's work on the Left component. Remember, the Left component is what's responsible for rendering the User Profile view. 
 
@@ -303,7 +303,7 @@ The last thing we need to do is render our bio template. The tricky part about t
   }
 ```
 
-####Step 7: Github Components (Middle)
+####Step 8: Github Components (Middle)
 
 In your ```components/Github``` folder create a file called ```Middle.js```. This Middle component will be responsible for getting and rendering the list of users Repos. It's going to follow a very similar pattern as the Left component so directions will be more vague. 
 
@@ -336,3 +336,42 @@ render: function(){
   )
 }
 ```
+
+####Step 9: Notes Components
+
+Like we've done before, this last step is going to be farily vague as a way for you to get used to building used to Flux type components without relying too much on the instructions. To accomplish this, I'll give you the render method of each component but you'll have to tie the pieces together with Flux.
+
+* In your ```components/Notes``` folder you should have a ```NotesList.js``` file already. Create two more files. One called ```AddNote.js``` and another called ```Notes.js```. 
+
+The render method for the Notes component looks like this,
+```javascript
+  render: function(){
+    return (
+      <div>
+        <h3> Notes for {this.props.username} </h3>
+        <AddNote username={this.props.username} />
+        <NotesList notes={this.state.notes}/>
+      </div>
+    )
+  }
+```
+
+and the render method for the ```AddNote``` component looks like this,
+```javascript
+render: function(){
+    return (
+      <div className="input-group cushion">
+        <input type="text" ref="note" className="form-control" placeholder="Add Note" />
+        <span className="input-group-btn">
+          <button className="btn btn-default" type="button" onClick={this.handleSubmit}>Submit</button>
+        </span>
+      </div>
+    )
+  }
+```
+
+and note that ```NotesList``` is finished already since it's a "pure" component (it doesn't have its own state) it just receives some props, maps over those and renders an unordered list.
+
+If you get stuck, check out the Left and Middle components as well as the Notes store. The patterns in those files are very similar to what you're going to do in these two new components. 
+
+Once you finish those last two components, head over to ```Profile.js``` and uncomment the commented code. 
