@@ -20,6 +20,10 @@ For reference the final folder structure will look something like this.
 
 ![File structure](http://s18.postimg.org/z8okmz1tl/Screen_Shot_2015_02_21_at_7_13_35_PM.png)
 
+####Step 1.5: Github API
+
+As you've probably guessed, this project is going to use the Github API to get user profile data. The issue with that is their API rate limits you based on your IP after 60 requests in the same hour. As you can imagine, that limit would go rather quickly with all of you hitting it from the same IP. To counteract this you'll need to go [HERE](https://github.com/settings/applications/new) and create a Github App in order to get a client_id and a client_secret. For the Homepage URL and Callback URL I used ```http://tylermcginnis.github.io/github-notetaker``` and ```tylermcginnis.github.io/github-notetaker/login/callback``` feel free to do the same but swap out my username for yours. Now, this brings up another issue. You never want to have your secret key be accessible on the front end. Sadly because this is a React workshop, it would add another layer of complexity to have everyone set up their own proxy server to serve the github requests. If you want to do that, you're more than welcomed to. However, if you're not worried about it (or if you don't care for pushing/sharing this code or project anywhere) in the ```githubUtils``` there are two placeholder variables ```id``` and ```sec``` that you can plug your newly created keys into and you won't get rate limited. 
+
 ####Step 2: Stores (Github Store)
 
 The nice thing about Flux is you really have to think about the organization and structure of your application before you start hacking away. When you finish building out your Stores, you'll know a few things about your application. You'll know your data schema, your action types, and your app constants. Once you know this information, the rest of your app will simply be build to support it. This makes starting off building your stores the easy choice when building a flux application. 
@@ -135,3 +139,46 @@ Let's now consider the actions the user should be able to make in regards to the
 * Now back in NotesStore.js, register both of those actions (ADD_NOTE and CHANGE_USER) and add the proper functionality when the AppDispatcher dispatches either of those events.
 
 *Note that although that the implementation for Notes is needing to make an external request to fetch/set the data, we're not doing that in the NotesStore but we'll do it in our Actions file. This keeps the traditional data flow Flux pattern of VIEWS -> DISPATCHER -> STORES constant.*
+
+####Step 4: Actions (Github Actions)
+
+Now that are stores are all set up, the next step is setting up our actions which will be dispatching our payloads. 
+
+Let's start off by creating a ```githubActions.js``` file in the ```actions``` folter. 
+
+This file needs to require three things. AppDispatcher, AppConstants, and githubUtils
+
+You might have noticed from step 1, but our githubUtils file is just returning us an object with a few helper methods for communicating with the Github API. One library we're using that we haven't talked about is [Axios](https://github.com/mzabriskie/axios). If you're coming from an Angular background Axios is very similar to $http. Axios is a "promise based http client for the browser and node". I'm a huge fan of it because it allows us to make promise based http requests without the need of something like jQuery. *If you've never used promises before, check out [this quick article](http://andyshora.com/promises-angularjs-explained-as-cartoon.html) explaining their purpose and how they work.*
+
+Head back to your githubActions.js file.
+
+* require AppDispatcher, AppConstants, and githubUtils.
+* Creata a githubActions object which has the following methods
+  - getUserBio
+  - getUserRepos
+  - changeUser
+
+Now let's build out these methods.
+
+* ```getUserBio``` is going to take in a ```username``` parameter, then it's going to invoke the ```getBio``` method on the ```githubUtils``` object. Right after that invocation add a ```.then(function(response){})``` property. 
+*For those unfamiliar with promises, Axios returns us a promise and what the ```.then``` does is it says, "when we get the data back from github, we'll invoke the function that you passed into ```.then``` passing it the github data as the first argument. This is useful because once we get the data from iTunes, we want to use AppDispatcher to dispatch our payload.*
+
+* In the function being passed to ```.then```, invoke the ```handleAction``` property on the AppDispatcher and pass it an object with the following properties/values
+  - actionType: AppConstants.GITHUB_USER_BIO
+  - data: response.data
+ 
+Because some of you might be unfamilar with promises and .then, here's what that code should look like.
+
+```javascript
+getUserBio: function(username){
+    githubUtils.getBio(username)
+      .then(function(response){
+        AppDispatcher.handleAction({ In
+            actionType: AppConstants.GITHUB_USER_BIO,
+            data: response.data
+        });
+      });
+  }
+```
+
+Now build out the ```getUserRepos``` and the ```changeUser``` methods. *hint: Both of these methods take in a ```username``` parameter. 
