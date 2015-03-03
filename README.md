@@ -107,7 +107,7 @@ Head back over to the ```githubStore.js``` file and inside the switch statement 
  - ```appConstants.GITHUB_CHANGE_USER``` which will call the ```newUser``` setter function and pass it ```action.data``` then emit that a change occurred.
  - Have the default case just return true
 
-*One thing to note is that when a change occurred, we're not emitting what that change was, we're only emitting that a change occurred. Our view doesn't care about what changed, it just cares that something did change. With the ~~power of the virtual DOM~~ we can just tell our view to rerender every time there is a change without performance worries.*
+*One thing to note is that when a change occurred, we're not emitting what that change was, we're only emitting that a change occurred. Our view doesn't care about what changed, it just cares that something did change. With the *power of the virtual DOM* we can just tell our view to rerender every time there is a change without performance worries.*
 
 * Use module.exports to export the githubStore.
 
