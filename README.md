@@ -163,7 +163,7 @@ Head back to your githubActions.js file.
 Now let's build out these methods.
 
 * ```getUserBio``` is going to take in a ```username``` parameter, then it's going to invoke the ```getBio``` method on the ```githubUtils``` object. Right after that invocation add a ```.then(function(response){})``` property.
-*For those unfamiliar with promises, Axios returns us a promise and what the ```.then``` does is it says, "when we get the data back from github, we'll invoke the function that you passed into ```.then``` passing it the github data as the first argument. This is useful because once we get the data from iTunes, we want to use AppDispatcher to dispatch our payload.*
+*For those unfamiliar with promises, Axios returns us a promise and what the ```.then``` does is it says, "when we get the data back from github, we'll invoke the function that you passed into ```.then``` passing it the github data as the first argument. This is useful because once we get the data from GitHub, we want to use AppDispatcher to dispatch our payload.*
 
 * In the function being passed to ```.then```, invoke the ```handleAction``` property on the AppDispatcher and pass it an object with the following properties/values
   - actionType: appConstants.GITHUB_USER_BIO
