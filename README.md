@@ -173,7 +173,7 @@ Because some of you might be unfamiliar with promises and .then, here's what tha
 getUserBio: function(username){
     githubUtils.getBio(username)
       .then(function(response){
-        AppDispatcher.handleAction({ In
+        AppDispatcher.handleAction({
             actionType: appConstants.GITHUB_USER_BIO,
             data: response.data
         });
