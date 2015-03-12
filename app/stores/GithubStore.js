@@ -24,9 +24,6 @@ var setRepos = function(data){
 };
 
 var githubStore = objectAssign({}, EventEmitter.prototype, {
-  emitChange: function(){
-    this.emit(CHANGE_EVENT);
-  },
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
   },
