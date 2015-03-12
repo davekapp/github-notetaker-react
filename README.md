@@ -142,7 +142,7 @@ Let's now consider the actions the user should be able to make in regards to the
 
 ####Step 4: Actions (Github Actions)
 
-Now that are stores are all set up, the next step is setting up our actions which will be dispatching our payloads.
+Now that our stores are all set up, the next step is setting up our actions which will be dispatching our payloads.
 
 Let's start off by creating a ```githubActions.js``` file in the ```actions``` folder.
 
