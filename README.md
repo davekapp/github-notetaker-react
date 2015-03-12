@@ -66,7 +66,6 @@ Assigns enumerable own properties of source objects to the target object and ret
 the target is going to be an empty object, the source is going to be the ```EventEmitter.prototype``` object, the source is going to be an object with properties we want our store to have, and the newObject is going to be an object with all of those properties combined.
 
 * Use objectAssign to create a new object called githubStore which extends EventEmitter and has the following properties.
-  - An ```emitChange``` method which uses the ```emit``` method which was originally on the EventEmitter.prototype to emit our change event (CHANGE_EVENT). *hint: use ```this.emit()```
   - An ```addChangeListener``` method which takes in a callback function as its only parameter and then invokes the ```on``` method which was originally on EventEmitter.prototype passing it the change event variable we defined earlier as well as the callback which was passed in.
   - A ```removeChangeListener``` method which takes in a callback function as its only parameter and then invokes the ```removeListener``` method which was originally on EventEmitter.prototype passing it the change event variable we defined earlier as well as the callback which was passed in.
   - A ```getUser``` method which returns the ```user``` property on our ```_state``` object.
