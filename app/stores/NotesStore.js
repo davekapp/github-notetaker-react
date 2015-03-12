@@ -25,9 +25,6 @@ var notesStore = objectAssign({}, EventEmitter.prototype, {
   getState: function(){
     return _state;
   },
-  emitChange: function(){
-    this.emit(CHANGE_EVENT);
-  },
   addChangeListener: function(cb){
     this.on(CHANGE_EVENT, cb);
   },
