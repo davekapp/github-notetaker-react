@@ -131,7 +131,6 @@ The NotesStore is going to look very similar to the GithubStore we just created 
 * creata a changeUser function which takes in a new user object as its parameter and then resets the state with the user property being the ```user``` property on the object which was passed in and the ```notes``` property being set to the ```notes``` property on the object which was passed in.
 * Create your notesStore object with the following methods (which are self explanatory and similar to what we did in githubStore.js)
   - getState
-  - emitChange
   - addChangeListener
   - removeChangeListener
 
