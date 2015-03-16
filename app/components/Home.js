@@ -1,5 +1,5 @@
 var React = require('react');
-var githubActions = require('../actions/githubActions');
+var githubActions = require('../actions/GithubActions');
 var SearchGithub = require('./SearchGithub');
 
 var Home = React.createClass({
