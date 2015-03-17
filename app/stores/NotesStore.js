@@ -10,9 +10,15 @@ var _state = {
   user: ""
 };
 
-var addNote =  function(note) {
+var addNote = function(note) {
   _state.notes.push(note);
 };
+
+var removeNote = function(noteToRemove) {
+  _state.notes = _state.notes.filter(function(note, index) {
+    return note.key !== noteToRemove.key;
+  });
+}
 
 var changeUser = function(userNotes) {
   _state.user = userNotes.user;
@@ -39,6 +45,11 @@ AppDispatcher.register(function(payload) {
   switch(action.actionType) {
     case AppConstants.NOTE_ADD:
       addNote(action.data);
+      NotesStore.emit(CHANGE_EVENT);
+      break;
+
+    case AppConstants.NOTE_REMOVE:
+      removeNote(action.data);
       NotesStore.emit(CHANGE_EVENT);
       break;
 
