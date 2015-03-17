@@ -1,9 +1,16 @@
 var Firebase = require('firebase');
 var AppConstants = require('../constants/AppConstants');
 
+var FBInstance = null;
+
 var firebaseUtils = {
   homeInstance: function(){
-    return new Firebase(AppConstants.FIREBASE_HOST);
+    if (FBInstance !== null) {
+      return FBInstance;
+    } else {
+      FBInstance = new Firebase(AppConstants.FIREBASE_HOST);
+      return FBInstance;
+    }
   },
 
   addNote: function(noteObj){

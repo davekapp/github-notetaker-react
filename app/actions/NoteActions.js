@@ -3,6 +3,7 @@ var AppConstants = require("../constants/AppConstants");
 var FirebaseUtils = require("../utils/FirebaseUtils.js");
 
 var currentFBCallback = null;
+var currentFBUsername = null;
 
 var NoteActions = {
   addNote: function(noteObj) {
@@ -38,10 +39,12 @@ var NoteActions = {
 
   changeUser: function(username) {
     if (currentFBCallback !== null) {
-      FirebaseUtils.homeInstance().child(username).off("value", currentFBCallback);
+      FirebaseUtils.homeInstance().child(currentFBUsername).off("value");
       currentFBCallback = null;
+      currentFBUsername = null;
     }
 
+    currentFBUsername = username;
     currentFBCallback = FirebaseUtils.homeInstance().child(username).on('value', function(snapshot) {
       AppDispatcher.handleAction({
         actionType: AppConstants.CHANGE_USER,
