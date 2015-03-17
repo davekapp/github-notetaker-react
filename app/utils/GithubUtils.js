@@ -1,18 +1,15 @@
 var AppConstants = require('../constants/AppConstants');
 var axios = require('axios');
-var Keys = require("../config/Keys");
 
-var id = Keys.GITHUB_ID;
-var sec = Keys.GITHUB_SECRET;
-var param = "?client_id=" + id + "&client_secret=" + sec;
+var serverUrl = AppConstants.SERVER_URL + "/github";
 
 var githubUtils = {
   getBio: function(username){
-    var url = "https://api.github.com/users/" + username + param;
+    var url = serverUrl + "/users/" + username;
     return axios.get(url);
   },
   getRepos: function(username){
-    var url = "https://api.github.com/users/" + username + "/repos" + param;
+    var url = serverUrl + "/users/" + username + "/repos";
     return axios.get(url);
   }
 };

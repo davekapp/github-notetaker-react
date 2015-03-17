@@ -7,8 +7,9 @@
     "type": "git",
     "url": ""
   },
+  "engine": "node 0.12.0",
   "keywords": [],
-  "author": "Tyler McGinnis",
+  "author": "Tyler McGinnis, David Kapp",
   "license": "MIT",
   "devDependencies": {
     "jsx-loader": "^0.12.2",
