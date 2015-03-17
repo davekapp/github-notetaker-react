@@ -2,14 +2,19 @@
   "name": "Github-Note-Taker",
   "version": "1.0.0",
   "description": "",
-  "main": "App.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "repository": {
     "type": "git",
     "url": ""
   },
-  "engine": "node 0.12.0",
+  "engines": {
+    "node": "0.12.0"
+  },
   "keywords": [],
-  "author": "Tyler McGinnis, David Kapp",
+  "authors": "Tyler McGinnis, David Kapp",
   "license": "MIT",
   "devDependencies": {
     "jsx-loader": "^0.12.2",
