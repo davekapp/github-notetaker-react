@@ -64,7 +64,7 @@ AppDispatcher.register(function(payload) {
       break;
 
     default:
-      console.log("unhandled action in GithubStore: " + action.actionType);
+      //console.log("unhandled action in GithubStore: " + action.actionType);
       return true;
       break;
   };

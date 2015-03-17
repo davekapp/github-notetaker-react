@@ -59,7 +59,7 @@ AppDispatcher.register(function(payload) {
       break;
 
     default:
-      console.log("unhandled action in NotesStore: " + action.actionType);
+      //console.log("unhandled action in NotesStore: " + action.actionType);
       return true;
       break;
   };
